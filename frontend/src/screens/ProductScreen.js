@@ -5,17 +5,20 @@ import { useSelector, useDispatch } from "react-redux";
 // Actions
 import { getProductDetails } from "../redux/actions/productActions";
 import { addToCart } from "../redux/actions/cartActions";
+import { useLocation } from "react-router-dom";
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const {productId} = location.state;
 
   const productDetails = useSelector((state) => state.getProductDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
-    if (product && match.params.id !== product._id) {
-      dispatch(getProductDetails(match.params.id));
+    if (product && productId !== product._id) {
+      dispatch(getProductDetails(productId));
     }
   }, [dispatch, match, product]);
 

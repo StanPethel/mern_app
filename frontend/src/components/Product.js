@@ -13,7 +13,7 @@ const Product = ({ imageUrl, description, price, name, productId }) => {
 
         <p className="info__price">${price}</p>
 
-        <Link to={`/product/${productId}`} className="info__button">
+        <Link to={`/product/${productId}`} state={{productId: productId}} className="info__button">
           View
         </Link>
       </div>
