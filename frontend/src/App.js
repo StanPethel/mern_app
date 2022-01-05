@@ -1,3 +1,7 @@
+//this uses the mongodb mern-cart cluster
+//to start this app connect to mongo db cluster by (node backend/server.js)
+//open seperate terminal and type (npm run dev)
+
 import "./App.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
