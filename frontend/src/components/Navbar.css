@@ -73,7 +73,7 @@
   }
   
   .hamburger__menu:hover > div {
-    background: #dd219e;
+    background: greenyellow;
   }
   
   .hamburger__menu > div {
