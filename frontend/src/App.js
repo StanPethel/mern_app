@@ -29,11 +29,11 @@ function App() {
       <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
       <main className="app">
         <Routes>
-        <Route exact path="/login" element={<Login/>}/>
-          <Route exact path="/register" element={<Register/>}/>
-          <Route exact path="/" element={<HomeScreen/>} />
-          <Route exact path="/product/:id" element={<ProductScreen/>} />
-          <Route exact path="/cart" element={<CartScreen/>} />
+        <Route  path="login" element={<Login/>}/>
+        <Route  path="register" element={<Register/>}/>
+        <Route exact path="/" element={<HomeScreen/>} />
+        <Route  path="product/:id" element={<ProductScreen/>} />
+        <Route  path="cart" element={<CartScreen/>} />
         </Routes>
       </main>
     </Router>
