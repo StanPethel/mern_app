@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-
+//git save
 
 function Register(){
     const [email, setEmail] = useState("");
@@ -26,8 +26,8 @@ function Register(){
     return(
 
         <div className="container">
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
             </div>
           <div className="card text-white bg-dark" style={{width: "18rem"}}>
             <div className="card-body">
@@ -46,7 +46,7 @@ function Register(){
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control"/>
                 <p>Create an account</p>
-                <button class="bg-dark" type='submit' ><h3>Register</h3></button>
+                <button className="bg-dark" type='submit' ><h3>Register</h3></button>
                 </div>
                 </form>
                 <Link to='/Login'>
