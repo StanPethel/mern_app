@@ -2,12 +2,13 @@ import "./ProductScreen.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+
 // Actions
 import { getProductDetails } from "../redux/actions/productActions";
 import { addToCart } from "../redux/actions/cartActions";
 import { useLocation } from "react-router-dom";
 
-const ProductScreen = ({ match, history }) => {
+const ProductScreen = ({ match, navigate }) => {
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -22,9 +23,10 @@ const ProductScreen = ({ match, history }) => {
     }
   }, [dispatch, match, product]);
 
+ 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, qty));
-    history.push(`/cart`);
+    navigate.push(`/cart`);
   };
 
   return (
