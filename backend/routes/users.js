@@ -9,17 +9,17 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     const { error } = validateUser(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(`Line 12: ${error.details[0].message}`);
 
     let user = await User.findOne({ email: req.body.email });
     if (user)
       return res.status(400).send(`Email ${req.body.email} already claimed!`);
 
-    const salt = await CryptoJS.genSalt(10);
+    
     user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: await CryptoJS.hash(req.body.password, salt),
+      password: req.body.password,
       isAdmin: req.body.isAdmin,
     });
 
@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
         isAdmin: user.isAdmin,
       });
   } catch (ex) {
-    return res.status(500).send(`Internal Server Error: ${ex}`);
+    return res.status(500).send(`Line 38: Internal Server Error: ${ex}`);
   }
 });
 //* POST a valid login attempt
@@ -48,14 +48,11 @@ router.post("/login", async (req, res) => {
 
     let user = await User.findOne({ email: req.body.email });
     if (!user)
-      return res.status(400).send(`Invalid email or password.`);
+      return res.status(400).send(`User does not exist!`);
 
-    const validPassword = await CryptoJS.compare(
-      req.body.password,
-      user.password
-    );
-    if (!validPassword)
-      return res.status(400).send("Invalid email or password.");
+   
+    if (user.password !== req.body.password)
+      return res.status(400).send("Invalid password.");
 
     const token = user.generateAuthToken();
     return res.send(token);
@@ -64,130 +61,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// We need an endpoint that makes a firend request for a spcific user
-//
-
-// router.post('/friends/:userToBefriendId/request', [auth], async (req, res) => {
-//   try{
-//     const signedInUser = await User.findById(req.user._id);
-
-//     const userToBefriend = await User.findById(req.params.userToBefriendId);
-
-//     const friendRequest = new FriendRequest({
-//       friendId: signedInUser._id
-//     });
-  
-//     userToBefriend.friends.push(friendRequest);
-  
-//     await userToBefriend.save()
-  
-//     return res.send(userToBefriend);
-//   } catch (ex) {
-//     console.log(ex);
-//     return res.status(500).send(`Internal Server Error: ${ex}`);
-//   }
-
-// });
-
-// router.put("/friends/:friendRequestId/accept", [auth], async (req, res) => {
-//   try {
-//     const signedInUser = await User.findById(req.user._id);
-
-//     let friendRequest = signedInUser.friends.id(req.params.friendRequestId);
-
-//     friendRequest.isAccepted = 'ACCEPTED';
-
-//     await signedInUser.save()
-
-//     return res.send(signedInUser);
-    
-//   } catch (err) {
-//     console.log(err);
-//       res.status(500).json(err);
-// }
-// }); 
-
-
-// router.put("/friends/:friendRequestId/decline", [auth], async (req, res) => {
-//   try {
-//     const signedInUser = await User.findById(req.user._id);
-
-//     let friendRequest = signedInUser.friends.id(req.params.friendRequestId);
-
-//     friendRequest.isAccepted = 'DECLINED';
-
-//     await signedInUser.save()
-
-//     return res.send(signedInUser);
-    
-//   } catch (err) {
-//       res.status(500).json(err);
-// }
-// }); 
-
-
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find();
-    return res.send(users);
-  } catch (ex) {
-    return res.status(500).send(`Internal Server Error: ${ex}`);
-  }
-});
-
-router.get("/current", [auth], async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id);
-
-    return res.send(user);
-  } catch (ex) {
-    return res.status(500).send(`Internal Server Error: ${ex}`);
-  }
-});
-
-// router.get("/allfriends", [auth], async (req, res) => {
-//   try {
-
-//     const user = await User.findById(req.user._id);
-
-//     const friendsObjects = []
-
-//     for (let i =0; i< user.friends.length; i++){
-//       if(user.friends[i].isAccepted == 'ACCEPTED'){
-//         const aFriend = await User.findById(user.friends[i].friendId)
-//         friendsObjects.push(aFriend);
-//       }
-//     }
-    
-//     return res.send(friendsObjects);
-
-//   } catch (ex) {
-//     return res.status(500).send(`Internal Server Error: ${ex}`);
-//   }
-// });
-    
-    // create an empty array
-
-    // loop over the user.firends array
-    
-      // for each friend make an findById call 
-    
-      // add that friend object ot the empty array
-    
-    // return the array that is holding all of the firend user objects
-
-
-
-router.get('/:userId', async (req, res) => {
-  const user = await User.findById(req.params.userId);
-  return res.send(user);
-
-});
-
 
 
 //* DELETE a single user from the database
-router.delete("/:userId", [auth, admin], async (req, res) => {
+router.delete("/:userId", [auth], async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     if (!user)

@@ -17,9 +17,9 @@ function Register(){
 		email: email,
 		password: password
 		};
-	    let response = await axios.post("http://localhost:5001/register", registerPost);
+	    let response = await axios.post("http://localhost:5001/api/users/register", registerPost);
 		console.log(response.data)
-		localStorage.setItem('token', response.data);
+		localStorage.setItem('token', response.headers["x-auth-token"]);
 		window.location = '/login';
 	}
 

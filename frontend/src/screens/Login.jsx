@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  let token = localStorage.getItem("token")
+  console.log(token)
   async function handleSubmit(event) {
     event.preventDefault();
     let response = await axios.post("http://localhost:5001/login", {

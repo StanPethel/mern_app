@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
+const config = require("config");
 
 
 
@@ -20,10 +20,8 @@ const userSchema = mongoose.Schema({
     minLength: 2,
     maxLength: 255,
   },
-  friends: { type: [friendSchema], ref: 'Friends'},
   password: { type: String, required: true, minLength: 8, maxLength: 1024 },
   isAdmin: { type: Boolean, default:false},
-  posts: { type: [ postSchema ]}
 
 });
 
@@ -36,7 +34,7 @@ userSchema.methods.generateAuthToken = function () {
       isAdmin: this.isAdmin,
       
     }, 
-    config.get("JWT_SECRET")
+    process.env.JWT_SECRET
   );
 };
 
@@ -45,6 +43,7 @@ const validateUser = (user) => {
     name: Joi.string().min(5).max(50).required(),
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(1024).required(),
+    isAdmin: Joi.boolean()
   });
   return schema.validate(user);
 };
@@ -58,14 +57,7 @@ const validateLogin = (req) => {
 };
 
 const User = mongoose.model("User", userSchema);
-//const FriendRequest = mongoose.model("FriendRequest", friendSchema);
-
-
-
-
 module.exports.User = User;
-//module.exports.FriendRequest = FriendRequest;
-
 module.exports.userSchema = userSchema;
 module.exports.validateUser = validateUser;
 module.exports.validateLogin = validateLogin;

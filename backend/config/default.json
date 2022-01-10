@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://user-345:user-345@mern-cart.fesqo.mongodb.net/mern-cart?retryWrites=true&w=majority",
+    "JWT_SECRET": "blahblah1737fdkhsdefkjhseuo843r8ofehi"
+}
