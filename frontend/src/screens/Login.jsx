@@ -17,7 +17,7 @@ function Login(props) {
     console.log(response.data);
     // Save token in local storage and refresh page
     localStorage.setItem("token", response.data);
-    window.location = "/";
+    window.location.href = "http://localhost:3000/";
   }
 
   return (
@@ -47,9 +47,11 @@ function Login(props) {
                   </div>
                 </div>
                 <div class="d-grid gap-2">
-                  <button class="btn btn-secondary" type="button">
-                    <h3>Login</h3>
-                  </button>
+                  <Link to= '/'>
+                   <button class="btn btn-secondary" type="button">
+                     <h3>Login</h3>
+                   </button>
+                  </Link>
                 </div>
               </form>
             </div>
