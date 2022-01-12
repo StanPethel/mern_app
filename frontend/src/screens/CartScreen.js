@@ -1,19 +1,32 @@
+import { addToCart, removeFromCart } from "../redux/actions/cartActions";
+import CartItem from "../components/CartItem";
 import "./CartScreen.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import StripeCheckout from "react-stripe-checkout";
+import { useNavigate } from "react-router";
+import { userRequest } from "../requestMethods";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 // Components
-import CartItem from "../components/CartItem";
+
 
 // Actions
-import { addToCart, removeFromCart } from "../redux/actions/cartActions";
+
 
 const CartScreen = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
   const { cartItems } = cart;
+  const navigate = useNavigate();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
 
   useEffect(() => {}, []);
 
@@ -34,6 +47,21 @@ const CartScreen = () => {
       .reduce((price, item) => price + item.price * item.qty, 0)
       .toFixed(2);
   };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: 500,
+        });
+        navigate.push("/success", {
+          stripeData: res.data,
+          products: cart, });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart.total, navigate]);
 
   return (
     <>
@@ -63,7 +91,18 @@ const CartScreen = () => {
             <p>${getCartSubTotal()}</p>
           </div>
           <div>
-            <button>Proceed To Checkout</button>
+          <StripeCheckout
+              name="MERN Shop"
+              image="https://www.popsci.com/uploads/2020/01/07/WMD5M52LJFBEBIHNEEABHVB6LA.jpg"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <button>CHECKOUT NOW</button>
+            </StripeCheckout>
           </div>
         </div>
       </div>
