@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {Link} from 'react-router-dom';
+import "./Login.css";
 
 
 function Login(props) {
@@ -47,7 +48,7 @@ function Login(props) {
                   </div>
                 </div>
                 <div class="d-grid gap-2">
-                  <Link to= '/'>
+                  <Link to= '/homescreen'>
                    <button class="btn btn-secondary" type="button">
                      <h3>Login</h3>
                    </button>

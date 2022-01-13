@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
-import { useNavigate } from "react-router";
 import { userRequest } from "../requestMethods";
+import { useNavigate } from "react-router";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -71,7 +71,7 @@ const CartScreen = () => {
 
           {cartItems.length === 0 ? (
             <div>
-              Your Cart Is Empty <Link to="/">Go Back</Link>
+              Your Cart Is Empty <Link to="/homescreen">Go Back</Link>
             </div>
           ) : (
             cartItems.map((item) => (

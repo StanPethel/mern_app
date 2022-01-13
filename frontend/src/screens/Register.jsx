@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import "./Register.css";
 //git save
 
 function Register(){
@@ -45,7 +45,7 @@ function Register(){
                 <div className="form-group" size="lg" controlId="password">
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control"/>
-                <p>Create an account</p>
+                <p>Register to Create an account</p>
                 <button className="bg-dark" type='submit' ><h3>Register</h3></button>
                 </div>
                 </form>

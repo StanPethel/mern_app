@@ -6,6 +6,7 @@ import "./App.css";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import { useSelector } from "react-redux";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -18,10 +19,11 @@ import Register from "./screens/Register";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import Success from './screens/Success';
 
 function App() {
   const [sideToggle, setSideToggle] = useState(false);
-
+  //const user = useSelector((state) => state.user.currentUser);
   return (
     <Router>
       <Navbar click={() => setSideToggle(true)} />
@@ -30,10 +32,12 @@ function App() {
       <main className="app">
         <Routes>
         <Route  path="login" element={<Login/>}/>
-        <Route  path="register" element={<Register/>}/>
-        <Route exact path="/" element={<HomeScreen/>} />
+        <Route  path="homescreen" element={<HomeScreen/>}/>
+        <Route exact path="/" element={<Register/>} />
         <Route  path="product/:id" element={<ProductScreen/>} />
         <Route  path="cart" element={<CartScreen/>} />
+        <Route path="/success" element={<Success/>}/>
+        
         </Routes>
       </main>
     </Router>

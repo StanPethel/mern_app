@@ -1,5 +1,5 @@
 {
     "mongoURI": "mongodb+srv://user-345:user-345@mern-cart.fesqo.mongodb.net/mern-cart?retryWrites=true&w=majority",
-    "JWT_SECRET": "blahblah1737fdkhsdefkjhseuo843r8ofehi",
-    "STRIPE_KEY": "sk_test_51KFBCwGo9fdRPIkSKnSxk8IwUENa8WLIrnXU88wX97voi9EyUaEjO0oRH1lMD66iGtodkhDJn48si8VP7KEMJ2JI00XxEJwVwt"
+    "JWT_SECRET": "blahblah1737fdkhsdefkjhseuo843r8ofehi"
+
 }
