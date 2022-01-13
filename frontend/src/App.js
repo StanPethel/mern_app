@@ -20,6 +20,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import Success from './screens/Success';
+import Pay from './screens/Pay';
 
 function App() {
   const [sideToggle, setSideToggle] = useState(false);
@@ -36,7 +37,8 @@ function App() {
         <Route exact path="/" element={<Register/>} />
         <Route  path="product/:id" element={<ProductScreen/>} />
         <Route  path="cart" element={<CartScreen/>} />
-        <Route path="/success" element={<Success/>}/>
+        <Route path="pay" element={<Pay/>}/>
+        <Route path="success" element={<Success/>}/>
         
         </Routes>
       </main>

@@ -46,7 +46,9 @@ function Register(){
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control"/>
                 <p>Register to Create an account</p>
+                <Link to='/Login'>
                 <button className="bg-dark" type='submit' ><h3>Register</h3></button>
+                </Link>
                 </div>
                 </form>
                 <Link to='/Login'>
