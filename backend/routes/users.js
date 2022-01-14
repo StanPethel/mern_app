@@ -12,15 +12,12 @@ router.post("/register", async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
     if (user)
       return res.status(400).send(`Email ${req.body.email} already claimed!`);
-
-    
-    user = new User({
+      user = new User({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
       isAdmin: req.body.isAdmin,
     });
-
     await user.save();
     const token = user.generateAuthToken();
     return res
