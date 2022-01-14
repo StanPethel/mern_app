@@ -16,7 +16,6 @@ function Login(props) {
       password: password,
     });
     console.log(response.data);
-    // Save token in local storage and refresh page
     localStorage.setItem("token", response.data);
     window.location.href = "http://localhost:3000/";
   }

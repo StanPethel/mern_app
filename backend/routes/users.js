@@ -4,8 +4,6 @@ const CryptoJS = require("crypto-js");
 const express = require("express");
 const router = express.Router();
 
-
-//* POST register a new user
 router.post("/register", async (req, res) => {
   try {
     const { error } = validateUser(req.body);
@@ -38,8 +36,7 @@ router.post("/register", async (req, res) => {
     return res.status(500).send(`Line 38: Internal Server Error: ${ex}`);
   }
 });
-//* POST a valid login attempt
-//! when a user logs in, a new JWT token is generated and sent if their email/password credentials are correct
+
 router.post("/login", async (req, res) => {
   try {
     const { error } = validateLogin(req.body);
@@ -61,9 +58,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-
-//* DELETE a single user from the database
 router.delete("/:userId", [auth], async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);

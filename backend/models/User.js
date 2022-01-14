@@ -3,13 +3,6 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-
-
-// const friendSchema = mongoose.Schema({
-//   friendId: { type: mongoose.Schema.Types.ObjectId },
-//   isAccepted: { type: String, default: 'PENDING' }
-// })
-
 const userSchema = mongoose.Schema({
 
   name: { type: String, required: true, minLength: 5, maxLength: 50 },

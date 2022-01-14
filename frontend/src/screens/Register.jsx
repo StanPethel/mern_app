@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import "./Register.css";
-//git save
 
 function Register(){
     const [email, setEmail] = useState("");

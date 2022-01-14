@@ -4,29 +4,11 @@ import "./CartScreen.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-//import StripeCheckout from "react-stripe-checkout";
-//import { useNavigate } from "react-router";
-//import { userRequest } from "../requestMethods";
 
-//const KEY = process.env.REACT_APP_STRIPE;
-
-// Components
-
-
-// Actions
-
-
-const CartScreen = () => {
+  const CartScreen = () => {
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
-  //const [stripeToken, setStripeToken] = useState(null);
   const { cartItems } = cart;
-  //const navigate = useNavigate();
-
-  // const onToken = (token) => {
-  //   setStripeToken(token);
-  // };
 
   useEffect(() => {}, []);
 
@@ -47,21 +29,6 @@ const CartScreen = () => {
       .reduce((price, item) => price + item.price * item.qty, 0)
       .toFixed(2);
   };
-
-  // useEffect(() => {
-  //   const makeRequest = async () => {
-  //     try {
-  //       const res = await userRequest.post("/checkout/payment", {
-  //         tokenId: stripeToken.id,
-  //         amount: 500,
-  //       });
-  //       navigate.push("/success", {
-  //         stripeData: res.data,
-  //         products: cart, });
-  //     } catch {}
-  //   };
-  //   stripeToken && makeRequest();
-  // }, [stripeToken, cart.total, navigate]);
 
   return (
     <>

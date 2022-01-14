@@ -8,7 +8,7 @@ const KEY= process.env.REACT_APP_STRIPE;
 
 const Pay = () =>{
   const [stripeToken, setStripeToken]= useState(null)
-  const navigate = useNavigate();
+  const navigate = useNavigate(); navigate("/success");
   const cart = useSelector((state) => state.cart);
 
   const onToken =(token)=>{
@@ -44,7 +44,7 @@ const Pay = () =>{
           }}
          >
            {stripeToken ? (
-              <span>Processing. Please wait...</span>
+              navigate("/success")
             ) :(
           <StripeCheckout 
               name="MERN Shop"
@@ -75,5 +75,4 @@ const Pay = () =>{
         </div>
     );
 };
-
 export default Pay;
