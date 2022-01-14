@@ -23,7 +23,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
-app.use("/api/carts", cartRoute);
+app.use("/api/cart", cartRoute);
 
 
 const PORT = process.env.PORT || 5001;
