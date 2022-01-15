@@ -61,10 +61,12 @@ const Success = () => {
       }}
     >
       {orderId
-        ? `Order has been created successfully. Your order number is ${orderId}`
+        ? <h4>`Order has been created successfully. Your order number is ${orderId}`</h4>
         : `Successfull. Your order is being prepared...`}
-        <div>Hi {data.billing_details.name}, you bought:</div>
+        <h3>
+        <div> Hi {data.billing_details.name}, you bought:</div>
         {cart.cartItems.map(({name, price, qty}) => <div>{qty}x {name} for ${price}</div>)}
+        </h3>
         <Link to= '/homescreen'>
       <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
       </Link>
