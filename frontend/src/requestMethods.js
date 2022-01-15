@@ -4,7 +4,8 @@ const BASE_URL = "http://localhost:5001/api/";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
-const TOKEN = currentUser?.accessToken;
+// const TOKEN = currentUser?.accessToken;
+const TOKEN = localStorage.getItem('token')
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
