@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 
 const Success = () => {
   const location = useLocation();
+  console.log(location);
   const data = location.state.stripeData;
   const cart = location.state.cart;
 
@@ -62,6 +63,8 @@ const Success = () => {
       {orderId
         ? `Order has been created successfully. Your order number is ${orderId}`
         : `Successfull. Your order is being prepared...`}
+        <div>Hi {data.billing_details.name}, you bought:</div>
+        {cart.cartItems.map(({name, price, qty}) => <div>{qty}x {name} for ${price}</div>)}
         <Link to= '/homescreen'>
       <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
       </Link>

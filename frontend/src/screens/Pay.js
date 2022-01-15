@@ -2,7 +2,8 @@ import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { userRequest } from "../requestMethods";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../redux/actions/cartActions";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -11,7 +12,7 @@ const Pay = () => {
   const navigate = useNavigate();
 // navigate("/success");
   const cart = useSelector((state) => state.cart);
-
+  const dispatch = useDispatch();
   const onToken = (token) => {
     setStripeToken(token);
   };
@@ -50,6 +51,8 @@ const Pay = () => {
             cart: {...cart,total: getCartTotal(cart)},
           },
         });
+        clearCart(dispatch);
+
       } catch (error) {
         console.error(error);
       }
