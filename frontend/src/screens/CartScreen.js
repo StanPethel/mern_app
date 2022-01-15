@@ -38,7 +38,7 @@ import { Link } from "react-router-dom";
 
           {cartItems.length === 0 ? (
             <div>
-              Your Cart Is Empty <Link to="/">Go Back</Link>
+              Your Cart Is Empty <Link to="/homescreen">Go Back</Link>
             </div>
           ) : (
             cartItems.map((item) => (

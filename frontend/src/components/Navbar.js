@@ -27,7 +27,7 @@ const Navbar = ({ click }) => {
           </Link>
         </li>
         <li>
-          <Link to="/">Shop</Link>
+          <Link to="/homescreen">Shop</Link>
         </li>
       </ul>
 
