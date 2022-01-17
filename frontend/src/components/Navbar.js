@@ -19,6 +19,7 @@ const Navbar = ({ click }) => {
       <ul className="navbar__links">
         <li>
           <Link to="/">Register</Link>
+          <Link to="/">Logout</Link>
           <Link to="/cart" className="cart__link">
             <i className="fas fa-shopping-cart"></i>
             <span>
@@ -32,7 +33,8 @@ const Navbar = ({ click }) => {
       </ul>
 
       <div className="hamburger__menu" onClick={click}>
-        <div></div>
+        <div>
+        </div>
         <div></div>
         <div></div>
       </div>

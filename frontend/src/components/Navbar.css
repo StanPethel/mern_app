@@ -35,7 +35,7 @@
   .navbar__links > li > a > span {
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    margin-left: 12px;
   }
   
   .cart__link {
